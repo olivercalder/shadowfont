@@ -72,6 +72,8 @@ char short_to_char(short bits) {
             return 'Y';
         case 0b111001010100111:
             return 'Z';
+        case 0b111101101101111:
+            return '0';
         case 0b010010010010011:
             return '1';
         case 0b111001010100011:
@@ -238,6 +240,8 @@ short char_to_short(char c) {
         case 'Z':
         case 'z':
             return 0b111001010100111;
+        case '0':
+            return 0b111101101101111;
         case '1':
             return 0b010010010010011;
         case '2':

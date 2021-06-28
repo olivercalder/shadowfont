@@ -11,9 +11,13 @@ If you pass a filename as an argument, it will print the contents of that file u
 
 - Decide on `{en,de}code` vs `{en,de}crypt` verbiage
 - Switch to using `#define` statements for the pixel masks for characters, so they are consistent in both `char_to_short` and `short_to_char` and can be easily modified
+- Store keys as bits, rather than char strings of '1's and '0's
+  - Create helper program to convert between char strings and binary files
+- Store messages as nibbles, rather than human-readable chars
+  - Create helper program to convert between human-readable chars and packed nibbles
+- Create helper program to display a string in the shadow font
 - Build encoder
   - Figure out default strategy
-- Store keys as bits, rather than char strings of '1's and '0's
 - Build multithreaded brute-force decoder
 
 ## Things to optimize for:
