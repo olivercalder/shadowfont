@@ -18,142 +18,211 @@
 
 #include <stdlib.h>
 
+#define BITS_A              0b101101111101010
+#define BITS_B              0b011101011101011
+#define BITS_C              0b110001001001110
+#define BITS_D              0b011101101101011
+#define BITS_E              0b111001111001111
+#define BITS_F              0b001001111001111
+#define BITS_G              0b110101101001110
+#define BITS_H              0b101101111101101
+#define BITS_I              0b111010010010111
+#define BITS_J              0b010101100100100
+#define BITS_K              0b101101011101101
+#define BITS_L              0b111001001001001
+#define BITS_M              0b101101111111101
+#define BITS_N              0b101111111111101
+#define BITS_O              0b010101101101010
+#define BITS_P              0b001001111101011
+#define BITS_Q              0b110111101101010
+#define BITS_R              0b101101011101011
+#define BITS_S              0b011100111001110
+#define BITS_T              0b010010010010111
+#define BITS_U              0b111101101101101
+#define BITS_V              0b010101101101101
+#define BITS_W              0b101111111101101
+#define BITS_X              0b101101010101101
+#define BITS_Y              0b010010010101101
+#define BITS_Z              0b111001010100111
+#define BITS_0              0b111101101101111
+#define BITS_1              0b010010010010011
+#define BITS_2              0b111001010100011
+#define BITS_3              0b011100011100011
+#define BITS_4              0b100100111101101
+#define BITS_5              0b011100011001111
+#define BITS_6              0b011101111001110
+#define BITS_7              0b100100100100111
+#define BITS_8              0b111101010101110
+#define BITS_9              0b100100110101111
+#define BITS_PERIOD         0b010000000000000
+#define BITS_COMMA          0b010010000000000
+#define BITS_SINGLEQUOTE    0b000000000010010
+#define BITS_DOUBLEQUOTE    0b000000000101101
+#define BITS_COLON          0b000010000010000
+#define BITS_SEMICOLON      0b010010000010000
+#define BITS_EXCLAMATION    0b010000010010010
+#define BITS_QUESTION       0b010000010100011
+#define BITS_PLUS           0b000010111010000
+#define BITS_MINUS          0b000000111000000
+#define BITS_STAR           0b000101010101000
+#define BITS_SLASH          0b001001010100100
+#define BITS_PIPE           0b010010010010010
+#define BITS_BACKSLASH      0b100100010001001
+#define BITS_PERCENT        0b101001010100101
+#define BITS_CARET          0b000000000101010
+#define BITS_TILDE          0b000000001111000
+#define BITS_AMPERSAND      0b110101110101010
+#define BITS_OPENPAREN      0b100010010010100
+#define BITS_CLOSEPAREN     0b001010010010001
+#define BITS_OPENBRACKET    0b110010010010110
+#define BITS_CLOSEBRACKET   0b011010010010011
+#define BITS_OPENBRACE      0b110010011010110
+#define BITS_CLOSEBRACE     0b011010110010011
+#define BITS_LT             0b000100011100000
+#define BITS_GT             0b000001110001000
+#define BITS_LEQ            0b111000100011100
+#define BITS_GEQ            0b111000001110001
+#define BITS_EQUAL          0b000111000111000
+#define BITS_UNDERSCORE     0b111000000000000
+#define BITS_SPACE          0b000000000000000
+#define BITS_UNKNOWN        0b111111111111111
+
 char short_to_char(short bits) {
     switch (bits) {
-        case 0b101101111101010:
+        case BITS_A:
             return 'A';
-        case 0b011101011101011:
+        case BITS_B:
             return 'B';
-        case 0b110001001001110:
+        case BITS_C:
             return 'C';
-        case 0b011101101101011:
+        case BITS_D:
             return 'D';
-        case 0b111001111001111:
+        case BITS_E:
             return 'E';
-        case 0b001001111001111:
+        case BITS_F:
             return 'F';
-        case 0b110101101001110:
+        case BITS_G:
             return 'G';
-        case 0b101101111101101:
+        case BITS_H:
             return 'H';
-        case 0b111010010010111:
+        case BITS_I:
             return 'I';
-        case 0b010101100100100:
+        case BITS_J:
             return 'J';
-        case 0b101101011101101:
+        case BITS_K:
             return 'K';
-        case 0b111001001001001:
+        case BITS_L:
             return 'L';
-        case 0b101101111111101:
-            return 'M';         /* this one is rather questionable */
-        case 0b101111111111101:
-            return 'N';         /* this one is rather questionable */
-        case 0b010101101101010:
+        case BITS_M:
+            return 'M';
+        case BITS_N:
+            return 'N';
+        case BITS_O:
             return 'O';
-        case 0b001001111101011:
+        case BITS_P:
             return 'P';
-        case 0b110111101101010:
+        case BITS_Q:
             return 'Q';
-        case 0b101101011101011:
+        case BITS_R:
             return 'R';
-        case 0b011100111001110:
+        case BITS_S:
             return 'S';
-        case 0b010010010010111:
+        case BITS_T:
             return 'T';
-        case 0b111101101101101:
+        case BITS_U:
             return 'U';
-        case 0b010101101101101:
+        case BITS_V:
             return 'V';
-        case 0b101111111101101:
+        case BITS_W:
             return 'W';
-        case 0b101101010101101:
+        case BITS_X:
             return 'X';
-        case 0b010010010101101:
+        case BITS_Y:
             return 'Y';
-        case 0b111001010100111:
+        case BITS_Z:
             return 'Z';
-        case 0b111101101101111:
+        case BITS_0:
             return '0';
-        case 0b010010010010011:
+        case BITS_1:
             return '1';
-        case 0b111001010100011:
+        case BITS_2:
             return '2';
-        case 0b011100011100011:
+        case BITS_3:
             return '3';
-        case 0b100100111101101:
+        case BITS_4:
             return '4';
-        case 0b011100011001111:
+        case BITS_5:
             return '5';
-        case 0b011101111001110:
+        case BITS_6:
             return '6';
-        case 0b100100100100111:
+        case BITS_7:
             return '7';
-        case 0b111101010101110:
+        case BITS_8:
             return '8';
-        case 0b100100110101111:
+        case BITS_9:
             return '9';
-        case 0b010000000000000:
+        case BITS_PERIOD:
             return '.';
-        case 0b010010000000000:
+        case BITS_COMMA:
             return ',';
-        case 0b000000000010010:
+        case BITS_SINGLEQUOTE:
             return '\'';
-        case 0b000000000101101:
+        case BITS_DOUBLEQUOTE:
             return '"';
-        case 0b000010000010000:
+        case BITS_COLON:
             return ':';
-        case 0b010010000010000:
+        case BITS_SEMICOLON:
             return ';';
-        case 0b010000010010010:
+        case BITS_EXCLAMATION:
             return '!';
-        case 0b010000010100011:
+        case BITS_QUESTION:
             return '?';
-        case 0b000010111010000:
+        case BITS_PLUS:
             return '+';
-        case 0b000000111000000:
+        case BITS_MINUS:
             return '-';
-        case 0b000101010101000:
+        case BITS_STAR:
             return '*';
-        case 0b001001010100100:
+        case BITS_SLASH:
             return '/';
-        case 0b010010010010010:
+        case BITS_PIPE:
             return '|';
-        case 0b100100010001001:
+        case BITS_BACKSLASH:
             return '\\';
-        case 0b101001010100101:
+        case BITS_PERCENT:
             return '%';
-        case 0b000000000101010:
+        case BITS_CARET:
             return '^';
-        case 0b000000001111000:
+        case BITS_TILDE:
             return '~';
-        case 0b110101110101010:
+        case BITS_AMPERSAND:
             return '&';           /* this one is rather questionable */
-        case 0b100010010010100:
+        case BITS_OPENPAREN:
             return '(';
-        case 0b001010010010001:
+        case BITS_CLOSEPAREN:
             return ')';
-        case 0b110010010010110:
+        case BITS_OPENBRACKET:
             return '[';
-        case 0b011010010010011:
+        case BITS_CLOSEBRACKET:
             return ']';
-        case 0b110010011010110:
+        case BITS_OPENBRACE:
             return '{';
-        case 0b011010110010011:
+        case BITS_CLOSEBRACE:
             return '}';
-        case 0b000100011100000:
+        case BITS_LT:
             return '<';
-        case 0b000001110001000:
+        case BITS_GT:
             return '>';
-        /* case 0b111000100011100:
+        /* case BITS_LEQ:
          *     return '<=';
-         * case 0b111000001110001:
+         * case BITS_GEQ:
          *     return '>=';
          */
-        case 0b000111000111000:
+        case BITS_EQUAL:
             return '=';
-        case 0b111000000000000:
+        case BITS_UNDERSCORE:
             return '_';
-        case 0b000000000000000:
+        case BITS_SPACE:
             return ' ';
         default:
             return '#';         /* unknown symbol */
@@ -164,169 +233,169 @@ short char_to_short(char c) {
     switch (c) {
         case 'A':
         case 'a':
-            return 0b101101111101010;
+            return BITS_A;
         case 'B':
         case 'b':
-            return 0b011101011101011;
+            return BITS_B;
         case 'C':
         case 'c':
-            return 0b110001001001110;
+            return BITS_C;
         case 'D':
         case 'd':
-            return 0b011101101101011;
+            return BITS_D;
         case 'E':
         case 'e':
-            return 0b111001111001111;
+            return BITS_E;
         case 'F':
         case 'f':
-            return 0b001001111001111;
+            return BITS_F;
         case 'G':
         case 'g':
-            return 0b110101101001110;
+            return BITS_G;
         case 'H':
         case 'h':
-            return 0b101101111101101;
+            return BITS_H;
         case 'I':
         case 'i':
-            return 0b111010010010111;
+            return BITS_I;
         case 'J':
         case 'j':
-            return 0b010101100100100;
+            return BITS_J;
         case 'K':
         case 'k':
-            return 0b101101011101101;
+            return BITS_K;
         case 'L':
         case 'l':
-            return 0b111001001001001;
-        case 'M':         /* this one is rather questionable */
+            return BITS_L;
+        case 'M':
         case 'm':
-            return 0b101101111111101;
-        case 'N':         /* this one is rather questionable */
+            return BITS_M;
+        case 'N':
         case 'n':
-            return 0b101111111111101;
+            return BITS_N;
         case 'O':
         case 'o':
-            return 0b010101101101010;
+            return BITS_O;
         case 'P':
         case 'p':
-            return 0b001001111101011;
+            return BITS_P;
         case 'Q':
         case 'q':
-            return 0b110111101101010;
+            return BITS_Q;
         case 'R':
         case 'r':
-            return 0b101101011101011;
+            return BITS_R;
         case 'S':
         case 's':
-            return 0b011100111001110;
+            return BITS_S;
         case 'T':
         case 't':
-            return 0b010010010010111;
+            return BITS_T;
         case 'U':
         case 'u':
-            return 0b111101101101101;
+            return BITS_U;
         case 'V':
         case 'v':
-            return 0b010101101101101;
+            return BITS_V;
         case 'W':
         case 'w':
-            return 0b101111111101101;
+            return BITS_W;
         case 'X':
         case 'x':
-            return 0b101101010101101;
+            return BITS_X;
         case 'Y':
         case 'y':
-            return 0b010010010101101;
+            return BITS_Y;
         case 'Z':
         case 'z':
-            return 0b111001010100111;
+            return BITS_Z;
         case '0':
-            return 0b111101101101111;
+            return BITS_0;
         case '1':
-            return 0b010010010010011;
+            return BITS_1;
         case '2':
-            return 0b111001010100011;
+            return BITS_2;
         case '3':
-            return 0b011100011100011;
+            return BITS_3;
         case '4':
-            return 0b100100111101101;
+            return BITS_4;
         case '5':
-            return 0b011100011001111;
+            return BITS_5;
         case '6':
-            return 0b011101111001110;
+            return BITS_6;
         case '7':
-            return 0b100100100100111;
+            return BITS_7;
         case '8':
-            return 0b111101010101110;
+            return BITS_8;
         case '9':
-            return 0b100100110101111;
+            return BITS_9;
         case '.':
-            return 0b010000000000000;
+            return BITS_PERIOD;
         case ',':
-            return 0b010010000000000;
+            return BITS_COMMA;
         case '\'':
-            return 0b000000000010010;
+            return BITS_SINGLEQUOTE;
         case '"':
-            return 0b000000000101101;
+            return BITS_DOUBLEQUOTE;
         case ':':
-            return 0b000010000010000;
+            return BITS_COLON;
         case ';':
-            return 0b010010000010000;
+            return BITS_SEMICOLON;
         case '!':
-            return 0b010000010010010;
+            return BITS_EXCLAMATION;
         case '?':
-            return 0b010000010100011;
+            return BITS_QUESTION;
         case '+':
-            return 0b000010111010000;
+            return BITS_PLUS;
         case '-':
-            return 0b000000111000000;
+            return BITS_MINUS;
         case '*':
-            return 0b000101010101000;
+            return BITS_STAR;
         case '/':
-            return 0b001001010100100;
+            return BITS_SLASH;
         case '|':
-            return 0b010010010010010;
+            return BITS_PIPE;
         case '\\':
-            return 0b100100010001001;
+            return BITS_BACKSLASH;
         case '%':
-            return 0b101001010100101;
+            return BITS_PERCENT;
         case '^':
-            return 0b000000000101010;
+            return BITS_CARET;
         case '~':
-            return 0b000000001111000;
+            return BITS_TILDE;
         case '&':
-            return 0b110101110101010;   /* this one is rather questionable */
+            return BITS_AMPERSAND;  /* this one is rather questionable */
         case '(':
-            return 0b100010010010100;
+            return BITS_OPENPAREN;
         case ')':
-            return 0b001010010010001;
+            return BITS_CLOSEPAREN;
         case '[':
-            return 0b110010010010110;
+            return BITS_OPENBRACKET;
         case ']':
-            return 0b011010010010011;
+            return BITS_CLOSEBRACKET;
         case '{':
-            return 0b110010011010110;
+            return BITS_OPENBRACE;
         case '}':
-            return 0b011010110010011;
+            return BITS_CLOSEBRACE;
         case '<':
-            return 0b000100011100000;
+            return BITS_LT;
         case '>':
-            return 0b000001110001000;
+            return BITS_GT;
         /* case '<=':
-         *     return 0b111000100011100;
+         *     return BITS_LEQ;
          * case '>=':
-         *     return 0b111000001110001;
+         *     return BITS_GEQ;
          */
         case '=':
-            return 0b000111000111000;
+            return BITS_EQUAL;
         case '_':
-            return 0b111000000000000;
+            return BITS_UNDERSCORE;
         case ' ':
         case '\0':
         case '\n':
-            return 0b000000000000000;
+            return BITS_SPACE;
         default:
-            return 0b111111111111111;   /* unknown symbol */
+            return BITS_UNKNOWN;    /* unknown symbol */
     }
 }
 
