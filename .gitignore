@@ -1,2 +1,5 @@
-main
+shadowfont
+debug
+test
 *.o
+vgcore.*

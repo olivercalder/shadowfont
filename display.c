@@ -1,8 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "common.h"
+#include "mapping.h"
 
 void fprint_array(FILE *fd, int length, short *array, int width) {
-    int char_index = 0, pixel_row, pixel_col, filled, row_start, row_end, char_limit = width / 4;
+    int char_index = 0, pixel_row, pixel_col, filled, row_start, row_end, char_limit;
+    if (width < 0)
+        width = FALLBACK_WIDTH;
+    char_limit = width / 4;
     if (char_limit < 1)
         char_limit = length;
     while (char_index < length) {
@@ -25,4 +31,34 @@ void fprint_array(FILE *fd, int length, short *array, int width) {
 
 void print_array(int length, short *array, int width) {
     fprint_array(stdout, length, array, width);
+}
+
+void fprint_string(FILE *fd, int length, char *string, int width) {
+    short *array = malloc(sizeof(short) * length);
+    if (width < 0)
+        width = FALLBACK_WIDTH;
+    array = string_to_array(length, string);
+    print_array(length, array, width);
+    free(array);
+}
+
+void print_string(int length, char *string, int width) {
+    fprint_string(stdout, length, string, width);
+}
+
+void fprint_file(FILE *fd, char *filename, int width) {
+    FILE *infile;
+    char *buf;
+    int bufsize;
+    if (width < 0)
+        width = FALLBACK_WIDTH;
+    bufsize = sizeof(char) * width / FONT_WIDTH;
+    buf = malloc(bufsize);
+    infile = fopen(filename, "r");
+    while (fgets(buf, bufsize, infile) != NULL)
+        fprint_string(fd, strlen(buf), buf, width);
+}
+
+void print_file(char *filename, int width) {
+    fprint_file(stdout, filename, width);
 }

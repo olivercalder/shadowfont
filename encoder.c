@@ -39,7 +39,8 @@ void get_length_from_key_string(int key_length, char *key, int *output_length, i
     return;
 }
 
-#define BIT_OF_CHAR(c) (1 << ((c) - 'a'))
+#define MIRROR_BITS(bits, direction)    ((((bits) & 011111) << (1 - (direction))) | ((bits) & 022222) | (((bits) & 044444) >> (1 - (direction))))
+#define BIT_OF_CHAR(c, direction)       (MIRROR_BITS((1 << ((c) - 'a')), direction))
 
 short *decode_using_string(int input_length, int output_length, int start_position, char *encoded_message, char *key) {
     /* Assumes the key contains only '0's and '1's; performs "fold" if '1' */
@@ -48,7 +49,7 @@ short *decode_using_string(int input_length, int output_length, int start_positi
     array = malloc(sizeof(short) * output_length);
     position = start_position;
     for (i = 0; i < input_length; i++) {
-        array[position] |= BIT_OF_CHAR(encoded_message[i]);
+        array[position] |= BIT_OF_CHAR(encoded_message[i], direction);
         position += (key[i] - '1') & direction;
         direction = (('0' - key[i]) ^ direction) | 1;
     }
