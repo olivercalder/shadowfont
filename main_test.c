@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include "common.h"
 #include "mapping.h"
 #include "display.h"
@@ -27,7 +28,7 @@ int main(int argc, char *argv[]) {
     int start_position = 1;
     int computed_output_length, computed_start_position;
     char *result;
-    short *array = decode_using_string(
+    uint16_t *array = decode_using_string(
             input_length,
             output_length,
             start_position,

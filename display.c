@@ -4,7 +4,7 @@
 #include "common.h"
 #include "mapping.h"
 
-void fprint_array(FILE *fd, int length, short *array, int width) {
+void fprint_array(FILE *fd, int length, uint16_t *array, int width) {
     int char_index = 0, pixel_row, pixel_col, filled, row_start, row_end, char_limit;
     if (width < 0)
         width = FALLBACK_WIDTH;
@@ -29,12 +29,12 @@ void fprint_array(FILE *fd, int length, short *array, int width) {
     }
 }
 
-void print_array(int length, short *array, int width) {
+void print_array(int length, uint16_t *array, int width) {
     fprint_array(stdout, length, array, width);
 }
 
 void fprint_string(FILE *fd, int length, char *string, int width) {
-    short *array = malloc(sizeof(short) * length);
+    uint16_t *array = malloc(sizeof(uint16_t) * length);
     if (width < 0)
         width = FALLBACK_WIDTH;
     array = string_to_array(length, string);

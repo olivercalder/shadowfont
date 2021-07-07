@@ -2,10 +2,11 @@
 #define __DISPLAY_H
 
 #include <stdio.h>
+#include <stdint.h>
 
-void fprint_array(FILE *fd, int length, short *array, int width);
+void fprint_array(FILE *fd, int length, uint16_t *array, int width);
 
-void print_array(int length, short *array, int width);
+void print_array(int length, uint16_t *array, int width);
 
 void fprint_string(FILE *fd, int length, char *string, int width);
 

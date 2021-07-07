@@ -19,12 +19,14 @@
 #ifndef __MAPPING_H
 #define __MAPPING_H
 
-char short_to_char(short bits);
+#include <stdint.h>
 
-short char_to_short(char c);
+char uint16_to_char(uint16_t bits);
 
-char *array_to_string(int length, short *array);
+uint16_t char_to_uint16(char c);
 
-short *string_to_array(int length, char *str);
+char *array_to_string(int length, uint16_t *array);
+
+uint16_t *string_to_array(int length, char *str);
 
 #endif

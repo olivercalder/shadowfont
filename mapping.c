@@ -17,6 +17,7 @@
  */
 
 #include <stdlib.h>
+#include <stdint.h>
 
 #define BITS_A              0b101101111101010
 #define BITS_B              0b011101011101011
@@ -87,7 +88,7 @@
 #define BITS_SPACE          0b000000000000000
 #define BITS_UNKNOWN        0b111111111111111
 
-char short_to_char(short bits) {
+char uint16_to_char(uint16_t bits) {
     switch (bits) {
         case BITS_A:
             return 'A';
@@ -229,7 +230,7 @@ char short_to_char(short bits) {
     }
 }
 
-short char_to_short(char c) {
+uint16_t char_to_uint16(char c) {
     switch (c) {
         case 'A':
         case 'a':
@@ -399,18 +400,18 @@ short char_to_short(char c) {
     }
 }
 
-char *array_to_string(int length, short *array) {
+char *array_to_string(int length, uint16_t *array) {
     int i;
     char *str = malloc(sizeof(char) * length);
     for (i = 0; i < length; i++)
-        str[i] = short_to_char(array[i]);
+        str[i] = uint16_to_char(array[i]);
     return str;
 }
 
-short *string_to_array(int length, char *str) {
+uint16_t *string_to_array(int length, char *str) {
     int i;
-    short *arr = malloc(sizeof(short) * length);
+    uint16_t *arr = malloc(sizeof(uint16_t) * length);
     for (i = 0; i < length; i++)
-        arr[i] = char_to_short(str[i]);
+        arr[i] = char_to_uint16(str[i]);
     return arr;
 }
