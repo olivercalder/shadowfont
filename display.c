@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "common.h"
+#include "display.h"
 #include "mapping.h"
 
 void fprint_array(FILE *fd, int length, uint16_t *array, int width) {
@@ -57,6 +58,7 @@ void fprint_file(FILE *fd, char *filename, int width) {
     infile = fopen(filename, "r");
     while (fgets(buf, bufsize, infile) != NULL)
         fprint_string(fd, strlen(buf), buf, width);
+    fclose(infile);
 }
 
 void print_file(char *filename, int width) {

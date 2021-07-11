@@ -2,7 +2,7 @@
 #define __DISPLAY_H
 
 #include <stdio.h>
-#include <stdint.h>
+#include "common.h"
 
 void fprint_array(FILE *fd, int length, uint16_t *array, int width);
 

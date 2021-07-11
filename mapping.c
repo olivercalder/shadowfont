@@ -1,13 +1,16 @@
 /*
  * Oliver Calder
- * June 2021
+ * July 2021
  *
  * Mapping between 16-bit encodings and the corresponding ASCII letters.
  *
  * Supports capital letters, as well as some common symbols.
  *
  * Upper left cell is 0, lower right cell is 14, row major.
- * The bit position (rightmost 0, leftmost 14) of the corresponds to the cell index.
+ * The bit position (rightmost 0, leftmost 14) corresponds to the cell index.
+ *
+ * A 1 in bit position 15 is a placeholder which does not correspond to any
+ * pixel, and is necessary when encoding spaces.
  *
  * Thus, a pixel can be encoded using a single hexadecimal "digit";
  * that is, 0 is 0, a is 10, e is 14, etc.
@@ -17,7 +20,8 @@
  */
 
 #include <stdlib.h>
-#include <stdint.h>
+#include "mapping.h"
+#include "common.h"
 
 #define BITS_A              0b101101111101010
 #define BITS_B              0b011101011101011
@@ -89,7 +93,7 @@
 #define BITS_UNKNOWN        0b111111111111111
 
 char uint16_to_char(uint16_t bits) {
-    switch (bits) {
+    switch (bits & 077777) {
         case BITS_A:
             return 'A';
         case BITS_B:
