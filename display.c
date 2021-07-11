@@ -58,6 +58,7 @@ void fprint_file(FILE *fd, char *filename, int width) {
     infile = fopen(filename, "r");
     while (fgets(buf, bufsize, infile) != NULL)
         fprint_string(fd, strlen(buf), buf, width);
+    free(buf);
     fclose(infile);
 }
 
