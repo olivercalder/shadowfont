@@ -61,32 +61,22 @@ uint16_t mirror_bits(uint16_t bits, int direction) {
 }
 
 uint16_t get_bit_from_char_hex(char c, int direction) {
-    char buf[2] = {c, '\0'};
-    return mirror_bits(1 << (strtoul(buf, NULL, 16)), direction);
+    return mirror_bits(char_to_bit_hex(c), direction);
 }
 
 uint16_t get_bit_from_char_lower(char c, int direction) {
-    return mirror_bits(1 << (c - 'a'), direction);
+    return mirror_bits(char_to_bit_lower(c), direction);
 }
 
 uint16_t get_bit_from_char_upper(char c, int direction) {
-    return mirror_bits(1 << (c - 'A'), direction);
+    return mirror_bits(char_to_bit_upper(c), direction);
 }
 
-uint16_t get_bit_from_char(int format, char c, int direction) {
-    switch (format) {
-        case FMT_TXT_HEX:
-            return get_bit_from_char_hex(c, direction);
-        case FMT_TXT_LOWER:
-            return get_bit_from_char_lower(c, direction);
-        case FMT_TXT_UPPER:
-            return get_bit_from_char_upper(c, direction);
-        default:
-            return ~0;
-    }
+uint16_t get_bit_from_char(format_t format, char c, int direction) {
+    return mirror_bits(char_to_bit(format, c), direction);
 }
 
-uint16_t *decode_string(int format, int input_length, char *encoded_message, char *key) {
+uint16_t *decode_string(format_t format, int input_length, char *encoded_message, char *key) {
     /* Assumes the key contains only '0's and '1's; performs "fold" if '1' */
     int i, position, output_length, direction = 1;
     uint16_t *array;

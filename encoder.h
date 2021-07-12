@@ -25,9 +25,9 @@ uint16_t get_bit_from_char_lower(char c, int direction);
 
 uint16_t get_bit_from_char_upper(char c, int direction);
 
-uint16_t get_bit_from_char(int format, char c, int direction);
+uint16_t get_bit_from_char(format_t format, char c, int direction);
 
-uint16_t *decode_string(int format, int input_length, char *encoded_message, char *key);
+uint16_t *decode_string(format_t format, int input_length, char *encoded_message, char *key);
 
 uint16_t *decode_uint(int input_length, uint16_t *encoded_message, uint8_t *key);
 
