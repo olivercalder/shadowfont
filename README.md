@@ -10,14 +10,22 @@ If you pass a filename as an argument, it will print the contents of that file u
 ## TODO:
 
 - Decide on `{en,de}code` vs `{en,de}crypt` verbiage
+  - "encoding" is technically correct since messages are stored in a reversible scheme, but must know the scheme
+    - However, translating between hex, lower case, upper case, and binary "encodings" is certainly encoding
+  - "encrypting" is also technically correct, since one cannot translate from an `en{cod,crypt}ed` message without the key
+  - Thus, TODO: make this consistent:
+    - Use `{en,de}crypt` when referring to translation between plaintext and the array of `uint16_t` which make up the encrypted message
+    - Use `{en,de}code` when referring to translating between `uint16_t`, hex, lowercase, uppercase, and binary encodings
 - Store keys as bits, rather than char strings of '1's and '0's
   - Create helper program to convert between char strings and binary files
 - Store messages as nibbles, rather than human-readable chars
   - Create helper program to convert between human-readable chars and packed nibbles
 - Create helper program to display a string in the shadow font
-- Build encoder
-  - Figure out default strategy
+- Improve encryption
+  - Figure out better default strategy than `encode_simple` gives
 - Build multithreaded brute-force decoder
+- **Allow users to input a password or pre-generated key, and encrypt message using that**
+  - Loop through key string until the full message is encrypted
 
 ## Things to optimize for:
 - Fewest folds
@@ -32,5 +40,5 @@ If you pass a filename as an argument, it will print the contents of that file u
 - Most secure
   - Can one of the above optimizations be in place without compromising security?
   - Perhaps randomize the order in which pixels for a given character are masked?
-  - Pad message with redundant bits to maximize the number of other valid messages (ie. no invalid output characters) which can be built using the same encoded message but different key
+  - Pad message with redundant bits to maximize the number of other valid messages (ie. no invalid output characters) which can be built using the same encrypted message but different key
     - This seems the most promising, and the most challenging
