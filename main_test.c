@@ -5,15 +5,6 @@
 #include "display.h"
 #include "encoder.h"
 
-static char bit_to_char_lower(uint16_t bit) {
-    char c = 'a' - 1;
-    while (bit) {
-        c += 1;
-        bit >>= 1;
-    }
-    return c;
-}
-
 int main(int argc, char *argv[]) {
     /* Check that decoding "ABC" using a key works.
      * Start from the B to test the get_length_from_key_string() function.
