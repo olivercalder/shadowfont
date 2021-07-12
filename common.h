@@ -6,11 +6,14 @@
 #define FONT_WIDTH      4
 #define BUFSIZE         (TERM_WIDTH / FONT_WIDTH)
 
-#define FMT_RAW         0
-#define FMT_UINT        1
-#define FMT_TXT_HEX     2
-#define FMT_TXT_LOWER   3
-#define FMT_TXT_UPPER   4
+typedef enum {
+    FMT_TXT,
+    FMT_UINT,
+    FMT_TXT_HEX,
+    FMT_TXT_LOWER,
+    FMT_TXT_UPPER,
+    FMT_BIN,
+} format_t;
 
 typedef unsigned char   uint8_t;
 typedef unsigned short  uint16_t;
