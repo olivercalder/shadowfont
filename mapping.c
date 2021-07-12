@@ -19,6 +19,7 @@
  * readability, a pixel can be encoded with a as 0, o as 14, etc.
  */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "mapping.h"
 #include "common.h"
@@ -404,12 +405,69 @@ uint16_t char_to_uint16(char c) {
     }
 }
 
-char *array_to_string(int length, uint16_t *array) {
-    int i;
-    char *str = malloc(sizeof(char) * length);
-    for (i = 0; i < length; i++)
-        str[i] = uint16_to_char(array[i]);
-    return str;
+uint16_t char_to_bit_hex(char c) {
+    char buf[2] = {c, '\0'};
+    return (1 << strtoul(buf, NULL, 16));
+}
+
+uint16_t char_to_bit_lower(char c) {
+    return (1 << (c - 'a'));
+}
+
+uint16_t char_to_bit_upper(char c) {
+    return (1 << (c - 'A'));
+}
+
+uint16_t char_to_bit(format_t format, char c) {
+    switch (format) {
+        case FMT_TXT_HEX:
+            return char_to_bit_hex(c);
+        case FMT_TXT_LOWER:
+            return char_to_bit_lower(c);
+        case FMT_TXT_UPPER:
+            return char_to_bit_upper(c);
+        default:
+            break;
+    }
+    return ~0;  /* probably should return a more informative error */
+}
+
+/* Returns the position of the leftmost bit, where no bits is treated as 15 */
+int index_of_bit(uint16_t bit) {
+    int value = 15;
+    while (bit) {
+        value = (value + 1) & 0xf;
+        bit >>= 1;
+    }
+    return value;
+}
+
+char bit_to_char_hex(uint16_t bit) {
+    char buf[4] = {'\0', '\0', '\0', '\0'};
+    sprintf(buf, "%x", index_of_bit(bit));
+    return buf[0];
+}
+
+char bit_to_char_lower(uint16_t bit) {
+    return 'a' + index_of_bit(bit);
+}
+
+char bit_to_char_upper(uint16_t bit) {
+    return 'A' + index_of_bit(bit);
+}
+
+char bit_to_char(format_t format, uint16_t bit) {
+    switch (format) {
+        case FMT_TXT_HEX:
+            return bit_to_char_hex(bit);
+        case FMT_TXT_LOWER:
+            return bit_to_char_lower(bit);
+        case FMT_TXT_UPPER:
+            return bit_to_char_upper(bit);
+        default:
+            break;
+    }
+    return (char)-1;    /* probably should return a more informative error */
 }
 
 uint16_t *string_to_array(int length, char *str) {
@@ -418,4 +476,88 @@ uint16_t *string_to_array(int length, char *str) {
     for (i = 0; i < length; i++)
         arr[i] = char_to_uint16(str[i]);
     return arr;
+}
+
+char *array_to_string(int length, uint16_t *array) {
+    int i;
+    char *str = malloc(sizeof(char) * length);
+    for (i = 0; i < length; i++)
+        str[i] = uint16_to_char(array[i]);
+    return str;
+}
+
+uint16_t *string_to_bits_hex(int length, char *string) {
+    int i;
+    uint16_t *bits = malloc(sizeof(uint16_t) * length);
+    for (i = 0; i < length; i++)
+        bits[i] = char_to_bit_hex(string[i]);
+    return bits;
+}
+
+uint16_t *string_to_bits_lower(int length, char *string) {
+    int i;
+    uint16_t *bits = malloc(sizeof(uint16_t) * length);
+    for (i = 0; i < length; i++)
+        bits[i] = char_to_bit_lower(string[i]);
+    return bits;
+}
+
+uint16_t *string_to_bits_upper(int length, char *string) {
+    int i;
+    uint16_t *bits = malloc(sizeof(uint16_t) * length);
+    for (i = 0; i < length; i++)
+        bits[i] = char_to_bit_upper(string[i]);
+    return bits;
+}
+
+uint16_t *string_to_bits(format_t format, int length, char *string) {
+    switch (format) {
+        case FMT_TXT_HEX:
+            return string_to_bits_hex(length, string);
+        case FMT_TXT_LOWER:
+            return string_to_bits_lower(length, string);
+        case FMT_TXT_UPPER:
+            return string_to_bits_upper(length, string);
+        default:
+            break;
+    }
+    return (uint16_t *)~0;  /* probably should return a more informative error */
+}
+
+char *bits_to_string_hex(int length, uint16_t *bits) {
+    int i;
+    char *str = malloc(sizeof(char) * length);
+    for (i = 0; i < length; i++)
+        str[i] = bit_to_char_hex(bits[i]);
+    return str;
+}
+
+char *bits_to_string_lower(int length, uint16_t *bits) {
+    int i;
+    char *str = malloc(sizeof(char) * length);
+    for (i = 0; i < length; i++)
+        str[i] = bit_to_char_lower(bits[i]);
+    return str;
+}
+
+char *bits_to_string_upper(int length, uint16_t *bits) {
+    int i;
+    char *str = malloc(sizeof(char) * length);
+    for (i = 0; i < length; i++)
+        str[i] = bit_to_char_upper(bits[i]);
+    return str;
+}
+
+char *bits_to_string(format_t format, int length, uint16_t *bits) {
+    switch (format) {
+        case FMT_TXT_HEX:
+            return bits_to_string_hex(length, bits);
+        case FMT_TXT_LOWER:
+            return bits_to_string_lower(length, bits);
+        case FMT_TXT_UPPER:
+            return bits_to_string_upper(length, bits);
+        default:
+            break;
+    }
+    return (char *)~0;  /* probably should return a more informative error */
 }

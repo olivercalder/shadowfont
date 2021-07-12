@@ -28,8 +28,43 @@ char uint16_to_char(uint16_t bits);
 
 uint16_t char_to_uint16(char c);
 
-char *array_to_string(int length, uint16_t *array);
+uint16_t char_to_bit_hex(char c);
+
+uint16_t char_to_bit_lower(char c);
+
+uint16_t char_to_bit_upper(char c);
+
+uint16_t char_to_bit(format_t format, char c);
+
+/* Returns the position of the leftmost bit, where no bits is treated as 15 */
+int index_of_bit(uint16_t bit);
+
+char bit_to_char_hex(uint16_t bit);
+
+char bit_to_char_lower(uint16_t bit);
+
+char bit_to_char_upper(uint16_t bit);
+
+char bit_to_char(format_t format, uint16_t bit);
 
 uint16_t *string_to_array(int length, char *str);
+
+char *array_to_string(int length, uint16_t *array);
+
+uint16_t *string_to_bits_hex(int length, char *string);
+
+uint16_t *string_to_bits_lower(int length, char *string);
+
+uint16_t *string_to_bits_upper(int length, char *string);
+
+uint16_t *string_to_bits(format_t format, int length, char *string);
+
+char *bits_to_string_hex(int length, uint16_t *bits);
+
+char *bits_to_string_lower(int length, uint16_t *bits);
+
+char *bits_to_string_upper(int length, uint16_t *bits);
+
+char *bits_to_string(format_t format, int length, uint16_t *bits);
 
 #endif
