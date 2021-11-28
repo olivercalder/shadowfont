@@ -78,6 +78,7 @@ int main_display(int argc, char *argv[]) {
             break;
         case FMT_BIN:
             /* TODO */
+            fprintf(stderr, "ERROR: bin format currently unimplemented");
         default:
             fprintf(stderr, "ERROR: %s: unknown format '%s'\n\n", argv[1], argv[2]);
             return 1;
